@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import { Login } from "./Login";
@@ -17,7 +17,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/login" element={<Login onFormSwitch={toggleForm} />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={ currentForm === "login" ? ( <Login onFormSwitch={toggleForm} /> ) : (<SignUp onFormSwitch={toggleForm} />)} />
           <Route path="/signup" element={<SignUp onFormSwitch={toggleForm} />} />
           <Route path="/principal" element={<PrincipalPage />} />
         </Routes>
