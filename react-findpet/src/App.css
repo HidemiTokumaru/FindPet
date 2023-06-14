@@ -146,6 +146,35 @@ button {
       padding: 14px 16px;
     }
 
+
+
+
+
+
+
+    #barraLateral {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    #barraLateral li {
+      margin: 0 10px;
+    }
+  
+    #barraLateral b {
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+    }
+
+
+
+
+
     li a:hover {
       background-color: #839ffc;
     }

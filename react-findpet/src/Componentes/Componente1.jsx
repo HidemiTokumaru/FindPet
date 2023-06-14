@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "./perrofoto.jpg"
+import perroFoto from "./perrofoto.jpg";
 
 export const Componente1 = () =>{
     let data = {
@@ -8,7 +8,7 @@ export const Componente1 = () =>{
         descripcion:"Perro pequeño, con una cicatriz en el lomo, le gusta perseguir palomas",
         propietario:"Juan Rivas",
         contacto:947123854,
-        foto: "/Componente/perrofoto.jpg"
+        foto: <img src={perroFoto}/> 
     }
 
 
@@ -27,7 +27,7 @@ export const Componente1 = () =>{
 
         </tr>
         <tr>
-            <td><img src="/react-findpet/src/Componentes/perrofoto.jpg"/></td>
+            <td>{data.foto}</td>
             <td>{data.descripcion}</td>
             <td>{data.nombre}</td>
             <td>{data.raza}</td>
