@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const SignUp = (props) => {
+export const SignUp = (props) => { 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Verificar si los campos están llenados correctamente
-    if (email && pass && name) {
-      // Realizar acciones de registro o enviar datos al servidor
 
-      // Redirigir al usuario a la ruta "/principal"
-      navigate("/principal");
-    } else {
-      alert("Por favor, complete todos los campos.");
+    // Objeto de datos a enviar al servidor
+    const data = {
+      username: name,
+      email: email,
+      password: pass
+    };
+
+    if (email && pass && name) {
+      // Realizar la solicitud POST al servidor usando fetch
+      fetch('http://localhost:5000/User', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      navigate('/principal');
     }
+    else{
+      alert("Por favor, complete todos los campos.")
   }
+}
 
   return (
     <div className="auth-form-container">
@@ -35,5 +48,5 @@ export const SignUp = (props) => {
       <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
     </div>
   );
-}
 
+}

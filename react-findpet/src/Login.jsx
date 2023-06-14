@@ -8,29 +8,31 @@ export const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Objeto de datos a enviar al servidor
-    const data = {
-      username: email,
-      password: pass
-    };
-
-    if(email === "" || pass === ""){
-        alert("llena las casillas")
+    // Verificar si los campos están llenados correctamente
+    if (email && pass) {
+      // Comparar los datos del formulario con los usuarios registrados en la base de datos
+      fetch('http://localhost:5000/User', { method: 'GET',})
+        .then(response => response.json())
+        .then(users => {
+          let isLoggedIn = false;
+          users.forEach(user => {
+            if (user.email === email && user.password === pass) {
+              isLoggedIn = true;
+            }
+          });
+          if (isLoggedIn) {
+            // Si el usuario existe, redirigir a la ruta /principal
+            navigate("/principal");
+          } else {
+            alert("El usuario no existe.");
+          }
+        });
+      } 
+    
+    else {
+      alert("Por favor, complete todos los campos.");
     }
-    else{
-    // Realizar la solicitud POST al servidor usando fetch
-    fetch('http://localhost:5000/registro', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    navigate('/principal');
-
-}
-}
+  }
 
   return (
     <div className="auth-form-container">
@@ -44,5 +46,5 @@ export const Login = (props) => {
       </form>
       <button className="link-btn" onClick={() => props.onFormSwitch('signUp')}>Don't have an account? Register here.</button>
     </div>
-  )
+  );
 }
