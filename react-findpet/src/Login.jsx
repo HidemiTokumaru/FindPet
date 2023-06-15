@@ -11,25 +11,24 @@ export const Login = (props) => {
     // Verificar si los campos están llenados correctamente
     if (email && pass) {
       // Comparar los datos del formulario con los usuarios registrados en la base de datos
-      fetch('http://localhost:5000/User', { method: 'GET',})
+      fetch('http://localhost:5000/User', { method: 'GET' })
         .then(response => response.json())
         .then(users => {
-          let isLoggedIn = false;
+          let userId = null;
           users.forEach(user => {
             if (user.email === email && user.password === pass) {
-              isLoggedIn = true;
+              userId = user.IdUser;
             }
           });
-          if (isLoggedIn) {
-            // Si el usuario existe, redirigir a la ruta /principal
-            navigate("/principal");
-          } else {
-            alert("El usuario no existe.");
+          if (userId===null){
+             alert("El usuario no existe.");
+          }
+          else{
+            // Si el usuario existe, redirigir a la ruta /principal con el ID del usuario en la URL
+            navigate(`/principal/${userId}`);
           }
         });
-      } 
-    
-    else {
+      } else {
       alert("Por favor, complete todos los campos.");
     }
   }
@@ -48,3 +47,6 @@ export const Login = (props) => {
     </div>
   );
 }
+
+
+

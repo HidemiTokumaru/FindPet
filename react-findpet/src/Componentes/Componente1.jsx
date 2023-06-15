@@ -1,46 +1,252 @@
-import React, {useState} from "react";
-import perroFoto from "./perrofoto.jpg";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-export const Componente1 = () =>{
-    let data = {
-        nombre:"Bobby",
-        raza:"Bulldog",
-        descripcion:"Perro pequeño, con una cicatriz en el lomo, le gusta perseguir palomas",
-        propietario:"Juan Rivas",
-        contacto:947123854,
-        foto: <img src={perroFoto}/> 
+const Componente1 = () => {
+  const { userId } = useParams();
+  const [perros, setPerros] = useState([]);
+  const [editarPostId, setEditarPostId] = useState(null);
+  const [editarNombre, setEditarNombre] = useState("");
+  const [editarDescripcion, setEditarDescripcion] = useState("");
+  const [editarRaza, setEditarRaza] = useState("");
+
+  useEffect(() => {
+    obtenerPerrosPerdidos();
+  }, [userId]);
+
+  const obtenerPerrosPerdidos = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts?userId=${userId}`);
+      const data = await response.json();
+      setPerros(data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  const handleEditarPost = (postId, nombre, descripcion, raza) => {
+    setEditarPostId(postId);
+    setEditarNombre(nombre);
+    setEditarDescripcion(descripcion);
+    setEditarRaza(raza);
+  };
+
+  const handleActualizarPost = (postId) => {
+    const post = {
+      PetName: editarNombre,
+      PetDescription: editarDescripcion,
+      PetBreed: editarRaza
+    };
+    
+    fetch(`http://localhost:5000/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(post)
+    })
+      .then(response => {
+        if (response.ok) {
+          obtenerPerrosPerdidos();
+          setEditarPostId(null);
+          setEditarNombre("");
+          setEditarDescripcion("");
+          setEditarRaza("");
+          alert("Post actualizado exitosamente");
+        } else {
+          alert("Error en la solicitud");
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const handleEliminarPost = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${postId}`, {
+        method: "DELETE"
+      });
+  
+      if (response.ok) {
+        // Eliminación exitosa, realizar alguna acción adicional si es necesario
+        console.log("Post eliminado exitosamente");
+        // Actualizar la lista de perros después de eliminar el post
+        const perrosActualizados = perros.filter((perro) => perro.id !== postId);
+        setPerros(perrosActualizados);
+      } else {
+        throw new Error("Error al eliminar el post");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
-    return(
-        //Hacer una intereativa para mostrar todos los perros perdidos de la tabla
-<div>
-    <table id="perro">
-        <tr>
+
+  return (
+    <div>
+      <table id="perro">
+        <thead>
+          <tr>
             <th>Foto</th>
-            <th>Descripción</th>
             <th>Nombre</th>
+            <th>Descripción</th>
             <th>Raza</th>
-            <th>Num contacto</th>
-            <th>Dueño</th>
-
-        </tr>
-        <tr>
-            <td>{data.foto}</td>
-            <td>{data.descripcion}</td>
-            <td>{data.nombre}</td>
-            <td>{data.raza}</td>
-            <td>{data.contacto}</td>
-            <td>{data.propietario}</td>
-
-        </tr>
-    </table>
-    <br/>
-</div>
-    )
-
+            <th>Última vez visto</th>
+            <th>Contacto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {perros.map((perro) => (
+            <tr key={perro.id}>
+              <td>{perro.PetPhoto}</td>
+              <td>
+                {editarPostId === perro.id ? (
+                  <input
+                    type="text"
+                    value={editarNombre}
+                    onChange={(e) => setEditarNombre(e.target.value)}
+                  />
+                ) : (
+                  perro.PetName
+                )}
+              </td>
+              <td>
+                {editarPostId === perro.id ? (
+                  <input
+                    type="text"
+                    value={editarDescripcion}
+                    onChange={(e) => setEditarDescripcion(e.target.value)}
+                  />
+                ) : (
+                  perro.PetDescription
+                )}
+              </td>
+              <td>
+                {editarPostId === perro.id ? (
+                  <input
+                    type="text"
+                    value={editarRaza}
+                    onChange={(e) => setEditarRaza(e.target.value)}
+                  />
+                ) : (
+                  perro.PetBreed
+                )}
+              </td>
+              <td>{perro.PetLastSeen}</td>
+              <td>{perro.PetContact}</td>
+              <td>
+                {editarPostId === perro.id ? (
+                  <button onClick={handleActualizarPost}>Guardar</button>
+                ) : (
+                  <>
+                    <button onClick={() => handleEditarPost(perro.id, perro.PetName, perro.PetDescription, perro.PetBreed)}>
+                      Editar
+                    </button>
+                    <button onClick={() => handleEliminarPost(perro.id)}>
+                      Eliminar
+                    </button>
+                  </>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <br />
+    </div>
+  );
 }
-
-
 export default Componente1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
+
+// const Componente1 = () => {
+//   const { userId } = useParams();
+//   const [perros, setPerros] = useState([]);
+
+//   useEffect(() => {
+//     const obtenerPerrosPerdidos = async () => {
+//       try {
+//         const response = await fetch(`http://localhost:5000/posts?userId=${userId}`);
+//         const data = await response.json();
+//         setPerros(data);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+
+//     obtenerPerrosPerdidos();
+//   }, [userId]);
+
+//   return (
+//     <div>
+//       <table id="perro">
+//         <thead>
+//           <tr>
+//             <th>Foto</th>
+//             <th>Nombre</th>
+//             <th>Descripción</th>
+//             <th>Raza</th>
+//             <th>Última vez visto</th>
+//             <th>Contacto</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {perros.map((perro) => (
+//             <tr key={perro.id}>
+//               <td>{perro.PetPhoto}</td>
+//               <td>{perro.PetName}</td>
+//               <td>{perro.PetDescription}</td>
+//               <td>{perro.PetBreed}</td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//       <br />
+//     </div>
+//   );
+// };
+
+// export default Componente1;
+
