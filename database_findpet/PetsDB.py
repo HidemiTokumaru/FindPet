@@ -82,12 +82,20 @@ with app.app_context():
 def createPost():
     userId = request.args.get('userId')
     if request.method == "POST":
-        data = request.get_json()
-        newPost = Post(IdUser=data["IdUser"], PetName=data["PetName"], PetBreed=data["PetBreed"],
-                       PetDescription=data["PetDescription"], PetPhoto="/Perrofoto.jpg")
-        db.session.add(newPost)
-        db.session.add(newPost)
-        db.session.commit()
+        if userId:
+            data = request.get_json()
+            newPost = Post(IdUser=userId, PetName=data["PetName"], PetBreed=data["PetBreed"],
+                           PetDescription=data["PetDescription"], PetPhoto="/Perrofoto.jpg")
+            db.session.add(newPost)
+            db.session.add(newPost)
+            db.session.commit()
+        else:
+            data = request.get_json()
+            newPost = Post(IdUser=data["IdUser"], PetName=data["PetName"], PetBreed=data["PetBreed"],
+                           PetDescription=data["PetDescription"], PetPhoto="/Perrofoto.jpg")
+            db.session.add(newPost)
+            db.session.add(newPost)
+            db.session.commit()
         return "SUCCESS"
 
     if request.method == "GET":
@@ -96,15 +104,6 @@ def createPost():
         else:
             posts = Post.query.all()
         return jsonify(posts)
-    if request.method == "PUT":
-        info = request.get_json()
-        post = Post.query.filter_by(IdUser=userId).all()
-        post.PetName = info["PetName"]
-        post.PetBreed = info["PetBreed"]
-        post.PetDescription = info["PetDescription"]
-        post.PetPhoto = info["PetPhoto"]
-        db.session.commit()
-        return "SUCCESS"
 
 
 
