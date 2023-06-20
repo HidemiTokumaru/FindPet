@@ -6,7 +6,7 @@ const Componente2 = () => {
   useEffect(() => {
     const obtenerPerrosPerdidos = async () => {
       try {
-        const response = await fetch("http://localhost:5000/posts");
+        const response = await fetch("http://127.0.0.1:5000/posts");
         const data = await response.json();
         setPerros(data);
       } catch (error) {

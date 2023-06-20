@@ -7,31 +7,48 @@ export const SignUp = (props) => {
   const [pass, setPass] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Objeto de datos a enviar al servidor
     const data = {
       username: name,
       email: email,
       password: pass
     };
-
+  
     if (email && pass && name) {
-      // Realizar la solicitud POST al servidor usando fetch
-      fetch('http://localhost:5000/User', { 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      navigate('/principal');
+      try {
+        // Realizar la solicitud POST al servidor usando fetch
+        const response = await fetch('http://127.0.0.1:5000/User', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+  
+        if (response.ok) {
+          // La solicitud POST fue exitosa, realizar la solicitud GET para obtener el userId
+          const getUsersResponse = await fetch('http://127.0.0.1:5000/User', { method: 'GET' });
+          const users = await getUsersResponse.json();
+          let userId = null;
+          users.forEach(user => {
+            if (user.email === email && user.password === pass) {
+              userId = user.IdUser;
+            }
+          });
+          navigate(`/principal/${userId}`);
+        } else {
+          throw new Error('Error al realizar la solicitud POST');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert('Por favor, complete todos los campos.');
     }
-    else{
-      alert("Por favor, complete todos los campos.")
   }
-}
 
   return (
     <div className="auth-form-container">

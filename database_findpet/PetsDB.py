@@ -118,7 +118,7 @@ def modifyPost(id):
         post.PetName = info["PetName"]
         post.PetBreed = info["PetBreed"]
         post.PetDescription = info["PetDescription"]
-        post.PetPhoto = info["PetPhoto"]
+        # post.PetPhoto = info["PetPhoto"]
         db.session.commit()
         return "SUCCESS"
 
