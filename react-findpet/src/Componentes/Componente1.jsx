@@ -164,12 +164,13 @@ const Componente1 = () => {
             <th>Contacto</th>
             <th>Última vez visto</th>
 
+
           </tr>
         </thead>
         <tbody>
           {perros.map((perro) => (
             <tr key={perro.id}>
-              <td>{perro.PetPhoto}</td>
+              <td><img src={perro.PetPhoto}/></td>
               <td>
                 {editarPostId === perro.id ? (
                   <input

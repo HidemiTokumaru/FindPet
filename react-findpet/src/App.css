@@ -1,4 +1,192 @@
+/* Estilo general para todas las páginas */
 .App {
+  text-align: center;
+  font-size: small;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: rgb(105 105 105 / 92%);
+}
+
+/* Estilo específico para login.jsx y signup.jsx */
+#login-root,
+#signup-root {
+  background-image: url('https://img.freepik.com/vector-premium/patron-animales-dibujados-mano_23-2147537189.jpg?w=2000');
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-form-container,
+.login-form,
+.signUp-form {
+  background-color: #99b1ff;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 0.5rem;
+}
+
+/* Estilo para las demás secciones */
+.App:not(#login-root):not(#signup-root) {
+  background-color: rgb(232, 232, 255);
+}
+
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+input {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  border: none;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: rgb(105 105 105);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+  font-size: large;
+}
+
+.link-btn {
+  background: none;
+  color: white;
+  text-decoration: underline;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(300px + 2vmin);
+  color: rgb(255, 255, 255);
+}
+
+#perro {
+  width: 100%;
+  border-collapse: collapse;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: white;
+}
+
+#perro th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: rgb(210, 195, 248);
+  color: rgb(255, 255, 255);
+}
+
+#perro td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  color:rgb(105 105 105 / 92%);
+}
+
+#perro img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+#barraLateral {
+  list-style-type: none;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #99b1ff;
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center;
+  height: 70px; /* Ajusta la altura según tus necesidades */
+}
+
+#barraLateral li {
+  background-color: #ffffff; /* Cambia el color de relleno de los botones */
+  border-radius: 10px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: inline-block;
+  margin: 0 20px; /* Ajusta el espacio entre los botones según tus necesidades */
+}
+
+#letrasBarra,
+#textoBarra {
+  display: block;
+  color: rgb(105 105 105 / 92%);
+  text-align: center;
+  padding: 14px 20px;
+
+}
+
+/* Resto de estilos... */
+
+#titulo {
+  color: red;
+}
+
+#div1 {
+  width: 20%;
+  height: 100%;
+}
+
+#fotoperro {
+  width: 300px;
+  height: 300px;
+  background: beige;
+}
+
+#infoperro {
+  vertical-align: top;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#comentarios {
+  vertical-align: top;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .App {
   text-align: center;
   display: flex;
   min-height: 100vh;
@@ -104,7 +292,7 @@ button {
       text-align: left;
       border-bottom: 1px solid #ddd;
       background-color:rgb(210, 195, 248);
-      color: white; /* Cambia el color de texto del encabezado a blanco */
+      color: white;
     }
     #perro td {
         padding: 8px;
@@ -113,10 +301,9 @@ button {
         color: black;
     }
 
-    /* Estilos para la imagen */
     #perro img {
-        width: 200px; /* Ajusta el ancho según tus necesidades */
-        height: 200px; /* Mantén la proporción de aspecto */
+        width: 200px; 
+        height: 200px;
     }
 
       #barraLateral {
@@ -134,7 +321,7 @@ button {
 
     #letrasBarra{
       display: block;
-      color: rgb(15, 13, 13);
+      color: rgb(255, 255, 255);
       text-align: center;
       padding: 14px 16px;
     }
@@ -211,4 +398,4 @@ button {
 
     #pdatos {
         font-family: Arial;
-    }
+    } */

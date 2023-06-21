@@ -93,7 +93,7 @@ def createPost():
             data = request.get_json()
             newPost = Post(IdUser=userId, PetName=data["PetName"], PetBreed=data["PetBreed"],
                            PetDescription=data["PetDescription"], PetReference=data["PetReference"],
-                           PetOwner=data["PetOwner"], PetPhone=data["PetPhone"], PetPhoto="/Perrofoto.jpg")
+                           PetOwner=data["PetOwner"], PetPhone=data["PetPhone"], PetPhoto="https://th.bing.com/th/id/OIP.MVt1SQjC4WJvE-dYgE3R6gHaHa?w=198&h=198&c=7&r=0&o=5&dpr=1.6&pid=1.7")
             db.session.add(newPost)
             db.session.add(newPost)
             db.session.commit()
@@ -101,7 +101,7 @@ def createPost():
             data = request.get_json()
             newPost = Post(IdUser=data["IdUser"], PetName=data["PetName"], PetBreed=data["PetBreed"],
                            PetDescription=data["PetDescription"], PetReference=["PetReference"],
-                           PetOwner=["PetOwner"], PetPhone=["PetPhone"], PetPhoto="/Perrofoto.jpg")
+                           PetOwner=["PetOwner"], PetPhone=["PetPhone"], PetPhoto="https://th.bing.com/th/id/OIP.MVt1SQjC4WJvE-dYgE3R6gHaHa?w=198&h=198&c=7&r=0&o=5&dpr=1.6&pid=1.7")
             db.session.add(newPost)
             db.session.add(newPost)
             db.session.commit()

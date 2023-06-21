@@ -34,7 +34,7 @@ const Componente2 = () => {
         <tbody>
         {perros.map((perro) => (
           <tr key={perro.id}>
-            <td>{perro.PetPhoto}</td>
+            <td><img src={perro.PetPhoto}/></td>
             <td>{perro.PetName}</td>
             <td>{perro.PetDescription}</td>
             <td>{perro.PetBreed}</td>
