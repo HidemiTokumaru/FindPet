@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextPetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la mascota"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextPetBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPetName"
+        android:layout_marginTop="16dp"
+        android:hint="Raza de la mascota"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextPetDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPetBreed"
+        android:layout_marginTop="16dp"
+        android:hint="Descripción de la mascota"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextPetReference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPetDescription"
+        android:layout_marginTop="16dp"
+        android:hint="Referencia de la mascota"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextPetOwner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPetReference"
+        android:layout_marginTop="16dp"
+        android:hint="Propietario de la mascota"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPetOwner"
+        android:layout_marginTop="16dp"
+        android:text="Enviar" />
+    <Button
+        android:id="@+id/buttonShowPosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSend"
+        android:layout_marginTop="16dp"
+        android:text="Mostrar publicaciones" />
+
+</RelativeLayout>
