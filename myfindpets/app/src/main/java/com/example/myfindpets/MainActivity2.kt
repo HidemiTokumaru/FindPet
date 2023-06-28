@@ -184,7 +184,7 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun getPostsFromServer() {
         val client = OkHttpClient()
-        val url = "http://10.100.241.104:8080/posts"
+        val url = "http://10.100.249.84:5000/posts"
 
         val request = Request.Builder().url(url).build()
 
@@ -213,12 +213,14 @@ class MainActivity2 : AppCompatActivity() {
                             val petDescription = post.getString("PetDescription")
                             val petReference = post.getString("PetReference")
                             val petOwner = post.getString("PetOwner")
+                            val petPhone = post.getString("PetPhone")
 
                             val formattedPost = "Nombre de la mascota: $petName\n" +
                                     "Raza de la mascota: $petBreed\n" +
                                     "Descripción de la mascota: $petDescription\n" +
                                     "Referencia de la mascota: $petReference\n" +
-                                    "Propietario de la mascota: $petOwner"
+                                    "Propietario de la mascota: $petOwner\n" +
+                                    "Número de contacto: $petPhone"
 
                             posts.add(formattedPost)
                         }
@@ -239,5 +241,5 @@ class MainActivity2 : AppCompatActivity() {
         })
     }
 
-    
+
 }

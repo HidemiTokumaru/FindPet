@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editTextPetDescription: EditText
     private lateinit var editTextPetReference: EditText
     private lateinit var editTextPetOwner: EditText
+    private lateinit var editTextPetPhone: EditText
     private lateinit var buttonSend: Button
     private lateinit var buttonShowPosts: Button
 
     private val handler = Handler(Looper.getMainLooper())
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         editTextPetDescription = findViewById(R.id.editTextPetDescription)
         editTextPetReference = findViewById(R.id.editTextPetReference)
         editTextPetOwner = findViewById(R.id.editTextPetOwner)
+        editTextPetPhone = findViewById(R.id.editTextPetPhone)
         buttonSend = findViewById(R.id.buttonSend)
         buttonShowPosts = findViewById(R.id.buttonShowPosts)
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             val petDescription = editTextPetDescription.text.toString()
             val petReference = editTextPetReference.text.toString()
             val petOwner = editTextPetOwner.text.toString()
+            val petPhone = editTextPetPhone.text.toString()
 
             val dataObject = JSONObject()
             dataObject.put("PetName", petName)
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             dataObject.put("PetDescription", petDescription)
             dataObject.put("PetReference", petReference)
             dataObject.put("PetOwner", petOwner)
+            dataObject.put("PetPhone",petPhone)
 
             val data = dataObject.toString()
 
@@ -65,10 +68,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendDataToServer(data: String) {
+        val userId = intent.getIntExtra("userId", 20) // Obtener el ID del extra
         try {
             val client = OkHttpClient()
             val body = data.toRequestBody("application/json".toMediaTypeOrNull())
-            val url = "http://10.100.241.104:8080/posts" // Replace with your server IP address and port number
+            val url = "http://10.100.249.84:5000/posts?userId=${userId}" // Replace with your server IP address and port number userId
             val request = Request.Builder().url(url).post(body).build()
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -95,3 +99,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
+
+
+
+
